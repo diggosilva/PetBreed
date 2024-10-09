@@ -24,11 +24,16 @@ class FeedViewController: UIViewController {
     
     private func setNavBar() {
         title = "Raça dos Pets"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector (addButtonTapped))
     }
     
     private func setDelegatesAndDataSources() {
         feedView.tableView.delegate = self
         feedView.tableView.dataSource = self
+    }
+    
+    @objc private func addButtonTapped() {
+        print("Toco no botão ADD")
     }
 
 }
