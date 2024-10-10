@@ -48,3 +48,18 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
+
+enum AnimalType: Int {
+    case cat = 1
+    case dog = 2
+}
+
+class Animal {
+    var type: AnimalType
+    var breed: String
+    
+    init(type: AnimalType, breed: String) {
+        self.type = type
+        self.breed = breed
+    }
+}
