@@ -44,6 +44,9 @@ class FeedCell: UITableViewCell {
         case .dog:
             petImage.image = UIImage(systemName: "dog.circle.fill")?.withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
             breedLabel.text = animal.breed.capitalized
+        case .bird:
+            petImage.image = UIImage(systemName: "bird.circle.fill")?.withTintColor(.systemYellow, renderingMode: .alwaysOriginal)
+            breedLabel.text = animal.breed.capitalized
         }
     }
     

@@ -10,6 +10,7 @@ import Foundation
 enum AnimalType: Int {
     case cat = 1
     case dog = 2
+    case bird = 3
 }
 
 class Animal {

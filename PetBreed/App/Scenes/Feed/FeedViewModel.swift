@@ -31,6 +31,10 @@ class FeedViewModel {
             if listOfListOfAnimals[section].contains(where: { $0.type == .dog }) {
                 return "Cães"
             }
+            
+            if listOfListOfAnimals[section].contains(where: { $0.type == .bird }) {
+                return "Aves"
+            }
         }
         return ""
     }
@@ -41,7 +45,9 @@ class FeedViewModel {
         var addedSection = false
         
         for (index, animalList) in listOfListOfAnimals.enumerated() {
-            if animalType == .cat && animalList.contains(where: { $0.type == .cat }) || animalType == .dog && animalList.contains(where: { $0.type == .dog }) {
+            if animalType == .cat && animalList.contains(where: { $0.type == .cat }) ||
+                animalType == .dog && animalList.contains(where: { $0.type == .dog }) ||
+                animalType == .bird && animalList.contains(where: { $0.type == .bird }) {
                 listOfListOfAnimals[index].append(animal)
                 addedSection = true
                 break
