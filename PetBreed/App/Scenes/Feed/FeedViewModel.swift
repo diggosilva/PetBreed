@@ -11,7 +11,7 @@ class FeedViewModel {
     var listOfListOfAnimals: [Animal] = []
     
     func numbersOfSections() -> Int {
-        return listOfListOfAnimals.count
+        return 2
     }
     
     func numbersOfRowsInSections(section: Int) -> Int {
@@ -23,6 +23,10 @@ class FeedViewModel {
     }
     
     func titleForHeaderInSection(section: Int) -> String {
-        return ""
+        if section == 0 {
+            return "Gatos"
+        } else {
+            return "Cães"
+        }
     }
 }

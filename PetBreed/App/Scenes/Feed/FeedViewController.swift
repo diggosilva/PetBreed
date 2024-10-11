@@ -65,6 +65,10 @@ class FeedViewController: UIViewController {
 }
 
 extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numbersOfSections()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numbersOfRowsInSections(section: section)
     }
@@ -73,5 +77,9 @@ extension FeedViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: FeedCell.identifier, for: indexPath) as? FeedCell else { return UITableViewCell() }
         cell.configure(animal: viewModel.cellForRowAt(indexPath: indexPath))
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return viewModel.titleForHeaderInSection(section: section)
     }
 }
