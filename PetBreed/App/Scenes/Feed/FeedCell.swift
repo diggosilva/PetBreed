@@ -36,6 +36,17 @@ class FeedCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(animal: Animal) {
+        switch animal.type {
+        case .cat:
+            petImage.image = UIImage(systemName: "cat.circle.fill")?.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
+            breedLabel.text = animal.breed.capitalized
+        case .dog:
+            petImage.image = UIImage(systemName: "dog.circle.fill")?.withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
+            breedLabel.text = animal.breed.capitalized
+        }
+    }
+    
     private func setupView() {
         setHierarchy()
         setConstraints()

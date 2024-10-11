@@ -15,7 +15,7 @@ class FeedViewModel {
     }
     
     func numbersOfRowsInSections(section: Int) -> Int {
-        return 0
+        return listOfListOfAnimals.count
     }
     
     func cellForRowAt(indexPath: IndexPath) -> Animal {
