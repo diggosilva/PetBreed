@@ -41,7 +41,6 @@ class FeedViewModel {
     
     func addAnimal(animalType: AnimalType, breed: String) {
         let animal = Animal(type: animalType, breed: breed)
-        
         var addedSection = false
         
         for (index, animalList) in listOfListOfAnimals.enumerated() {

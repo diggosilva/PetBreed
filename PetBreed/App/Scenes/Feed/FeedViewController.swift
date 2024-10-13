@@ -40,7 +40,6 @@ class FeedViewController: UIViewController {
         let catAction = UIAlertAction(title: "Gato", style: .default, handler: { action in
             if let text = alert.textFields?.first?.text, !text.isEmpty {
                 self.viewModel.addAnimal(animalType: .cat, breed: text)
-                print("RaçaGatos: \(self.viewModel.listOfListOfAnimals)")
                 self.feedView.tableView.reloadData()
             }
         })
@@ -48,7 +47,6 @@ class FeedViewController: UIViewController {
         let dogAction = UIAlertAction(title: "Cachorro", style: .default, handler: { action in
             if let text = alert.textFields?.first?.text, !text.isEmpty {
                 self.viewModel.addAnimal(animalType: .dog, breed: text)
-                print("RaçaCães: \(self.viewModel.listOfListOfAnimals)")
                 self.feedView.tableView.reloadData()
             }
         })
