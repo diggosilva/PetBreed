@@ -39,32 +39,31 @@ class FeedViewController: UIViewController {
         
         let catAction = UIAlertAction(title: "Gato", style: .default, handler: { action in
             if let text = alert.textFields?.first?.text, !text.isEmpty {
-                self.viewModel.addAnimal(animalType: .cat, breed: text)
-                self.feedView.tableView.reloadData()
+                self.addAnimal(animalType: .cat, text: text)
             }
         })
         
         let dogAction = UIAlertAction(title: "Cachorro", style: .default, handler: { action in
             if let text = alert.textFields?.first?.text, !text.isEmpty {
-                self.viewModel.addAnimal(animalType: .dog, breed: text)
-                self.feedView.tableView.reloadData()
+                self.addAnimal(animalType: .dog, text: text)
             }
         })
         
         let birdAction = UIAlertAction(title: "Aves", style: .default) { action in
             if let text = alert.textFields?.first?.text, !text.isEmpty {
-                self.viewModel.addAnimal(animalType: .bird, breed: text)
-                self.feedView.tableView.reloadData()
+                self.addAnimal(animalType: .bird, text: text)
             }
         }
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-        
         alert.addAction(catAction)
         alert.addAction(dogAction)
         alert.addAction(birdAction)
-        alert.addAction(cancel)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)
+    }
+    
+    func addAnimal(animalType: AnimalType, text: String) {
+        self.viewModel.addAnimal(animalType: animalType, breed: text)
+        self.feedView.tableView.reloadData()
     }
 }
 
