@@ -7,8 +7,8 @@
 
 import Foundation
 
-class FeedViewModel {
-    var listOfListOfAnimals: [[Animal]] = []
+public class FeedViewModel {
+    private var listOfListOfAnimals: [[Animal]] = []
     
     func numbersOfSections() -> Int {
         return listOfListOfAnimals.count
