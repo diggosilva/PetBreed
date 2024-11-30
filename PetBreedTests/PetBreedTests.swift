@@ -6,30 +6,89 @@
 //
 
 import XCTest
+@testable import PetBreed
 
 final class PetBreedTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    var sut: FeedViewModel!
+    
+    override func setUp() {
+        super.setUp()
+        sut = FeedViewModel()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func testNumberOfSectionsWhenNoAnimalsAddedReturnsZero() {
+        let result = sut.numbersOfSections()
+        XCTAssertEqual(result, 0)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func testNumberOfSectionsWhenAnimalsAddedReturnsCorrectCount() {
+        sut.addAnimal(animalType: .dog, breed: "poddle")
+        sut.addAnimal(animalType: .cat, breed: "persa")
+        let result = sut.numbersOfSections()
+        XCTAssertEqual(result, 2)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testNumberOfRowsInSection() {
+        sut.addAnimal(animalType: .dog, breed: "beagle")
+        sut.addAnimal(animalType: .dog, breed: "bulldog")
+        sut.addAnimal(animalType: .cat, breed: "siames")
+        
+        let numberOfDogs = sut.numbersOfRowsInSections(section: 0)
+        let numberOfCats = sut.numbersOfRowsInSections(section: 1)
+        
+        XCTAssertEqual(numberOfDogs, 2)
+        XCTAssertEqual(numberOfCats, 1)
     }
-
+    
+    func testCellForRowAt() {
+        sut.addAnimal(animalType: .dog, breed: "beagle")
+        sut.addAnimal(animalType: .cat, breed: "siames")
+        
+        let firstAnimal = sut.cellForRowAt(indexPath: IndexPath(row: 0, section: 0))
+        let secondAnimal = sut.cellForRowAt(indexPath: IndexPath(row: 0, section: 1))
+        
+        XCTAssertEqual(firstAnimal.breed, "beagle")
+        XCTAssertEqual(secondAnimal.breed, "siames")
+    }
+    
+    func testTitleForHeader() {
+        sut.addAnimal(animalType: .dog, breed: "beagle")
+        sut.addAnimal(animalType: .cat, breed: "siames")
+        sut.addAnimal(animalType: .bird, breed: "Papagaio")
+        
+        let titleFordog = sut.titleForHeaderInSection(section: 0)
+        let titleForCat = sut.titleForHeaderInSection(section: 1)
+        let titleForBird = sut.titleForHeaderInSection(section: 2)
+        
+        XCTAssertEqual(titleFordog, "Cães")
+        XCTAssertEqual(titleForCat, "Gatos")
+        XCTAssertEqual(titleForBird, "Aves")
+    }
+    
+    func testAddAnimalCreatesNewSectionWhenTypeDoesNotExist() {
+        sut.addAnimal(animalType: .bird, breed: "Papagaio")
+        
+        let numberOfSections = sut.numbersOfSections()
+        let numberOfRowInSection = sut.numbersOfRowsInSections(section: 0)
+        
+        XCTAssertEqual(numberOfSections, 1)
+        XCTAssertEqual(numberOfRowInSection, 1)
+    }
+    
+    func testAddAnimalAddsAnimalToExistingSection() {
+        sut.addAnimal(animalType: .dog, breed: "beagle")
+        sut.addAnimal(animalType: .dog, breed: "bulldog")
+        
+        let numberOfSections = sut.numbersOfSections()
+        let numberOfRowInSection = sut.numbersOfRowsInSections(section: 0)
+        
+        XCTAssertEqual(numberOfSections, 1)
+        XCTAssertEqual(numberOfRowInSection, 2)
+    }
+    
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
+    }
 }
